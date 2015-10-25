@@ -1,4 +1,4 @@
-module.exports = 
+
 var Myo = require('myo');
 var Player = require('player');
 
@@ -6,7 +6,10 @@ var beat = new Player('sounds/friday.mp3');
 var beat2 = new Player('sounds/piano.mp3');
 
 var snare = new Player('sounds/cena2.mp3');
+var laser = new Player('sounds/laser.mp3');
 
+var rSnare = new Player('sounds/snarebeat.mp3');
+var hihat = new Player('soundss/hihat.mp3')
 
 //Start talking with Myo Connect
 Myo.connect('com.example.musicApp');
@@ -64,6 +67,7 @@ Myo.on('wave_on', function(){
 
 Myo.on('double_tap', function(){
     console.log('mmm... lemme see dat tounge');
+
     this.vibrate();
 });
 
@@ -87,6 +91,7 @@ Myo.on('disconnected', function() {
 
 Myo.on('fingers_spread', function(){
     console.log('shooting laser');
+    this.trigger('laser');
     this.vibrate();
 });
 
@@ -118,4 +123,52 @@ Myo.on('snare', function(){
     snare.play();
 });
 
+Myo.on('laser', function(){
+    laser.play();
+    laser.on('error', function(err){
+        // when error occurs
+        console.log(err);
+    });
+});
 
+Myo.on('orientation', function(data){
+    console.log('receiving data about orientation');
+    if(data.x > 0){
+        console.log('x greater than 0');
+        rSnare.play();
+        rSnare.on('error', function(err){
+            // when error occurs
+            console.log(err);
+        })
+    }
+
+    else{
+        console.log('x is less than 0');
+        hihat.play();
+        hihat.on('error', function(err){
+        // when error occurs
+        console.log(err);
+    });
+    }
+
+    if(data.y > 0){
+        console.log('y greater than 0');
+
+    }
+    else{
+        console.log('y is less than 0');
+    }
+    if(data.z > 0){
+        console.log('z greater than 0');
+    }
+    else{
+        console.log('z is less than 0');
+    }
+
+
+});
+Myo.on('gyroscope', function(data) {
+    if(data.x>0){
+        console.log('turning right');
+    }
+})
