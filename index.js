@@ -1,4 +1,3 @@
-
 var Myo = require('myo');
 var Player = require('player');
 
@@ -9,7 +8,30 @@ var snare = new Player('sounds/cena2.mp3');
 var laser = new Player('sounds/laser.mp3');
 
 var rSnare = new Player('sounds/snarebeat.mp3');
-var hihat = new Player('soundss/hihat.mp3')
+var hihat = new Player('sounds/hihat.mp3');
+var fart = new Player('sounds/fart.mp3');
+var clap = new Player('sounds/clap.mp3');
+
+/*fart.on('playend', function(item) {
+    console.log('src' + item + 'is donee');
+});
+
+clap.on('playend', function(item){
+    console.log('src' + item + 'is done');
+});
+
+clap.on('playend', function(item){
+    console.log('src' + item + 'is done');
+});
+
+rSnare.on('playend', function(item) {
+    console.log('src' + item + 'done');
+});
+
+hihat.on('playend', function(item){
+    console.log('src' + item + 'done');
+});*/
+
 
 //Start talking with Myo Connect
 Myo.connect('com.example.musicApp');
@@ -131,44 +153,55 @@ Myo.on('laser', function(){
     });
 });
 
-Myo.on('orientation', function(data){
-    console.log('receiving data about orientation');
+/*Myo.on('orientation', function(data){
+   // console.log('receiving data about orientation');
     if(data.x > 0){
-        console.log('x greater than 0');
-        rSnare.play();
-        rSnare.on('error', function(err){
-            // when error occurs
-            console.log(err);
-        })
-    }
+        //console.log('x greater than 0');
+        setTimeout(function() {
+            rSnare.play();
+            rSnare.on('error', function(err){
+                // when error occurs
+                console.log(err);
+            })
+        }, 3000);
+    } else if (data.x<0) {
+        //console.log('x is less than 0');
+        setTimeout(function() {
+            hihat.play();
+            hihat.on('error', function(err){
+                // when error occurs
+                console.log(err);
+            });
+        }, 3000);  
+    } else if (data.y > 0){
+        //console.log('y greater than 0');
+        setTimeout(function() {
+            fart.play();
+            fart.on('error', function(err){
+                // when error occurs
+                console.log(err);
+            });
+        }, 3000);  
+    } else if (data.y < 0){
+       // console.log('y is less than 0');
+        setTimeout(function() {
+            clap.play();
+            clap.on('error', function(err){
+                // when error occurs
+                console.log(err);
+            });
+        }, 3000);  
+    } else if(data.z > 0){
+        //console.log('z greater than 0');
 
-    else{
-        console.log('x is less than 0');
-        hihat.play();
-        hihat.on('error', function(err){
-        // when error occurs
-        console.log(err);
-    });
-    }
-
-    if(data.y > 0){
-        console.log('y greater than 0');
-
-    }
-    else{
-        console.log('y is less than 0');
-    }
-    if(data.z > 0){
-        console.log('z greater than 0');
-    }
-    else{
-        console.log('z is less than 0');
+    } else {
+       // console.log('z is less than 0');
     }
 
 
 });
 Myo.on('gyroscope', function(data) {
     if(data.x>0){
-        console.log('turning right');
+       // console.log('turning right');
     }
-})
+})*/
