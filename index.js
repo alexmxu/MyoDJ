@@ -1,7 +1,7 @@
 var Myo = require('myo');
 var Player = require('player');
 
-var beat = new Player('sounds/friday.mp3');
+var beat = new Player('sounds/uptown.mp3');
 var beat2 = new Player('sounds/piano.mp3');
 
 var snare = new Player('sounds/cena2.mp3');
@@ -153,7 +153,7 @@ Myo.on('laser', function(){
     });
 });
 
-/*Myo.on('orientation', function(data){
+setTimeout(function(){Myo.on('orientation', function(data){
    // console.log('receiving data about orientation');
     if(data.x > 0){
         //console.log('x greater than 0');
@@ -204,4 +204,4 @@ Myo.on('gyroscope', function(data) {
     if(data.x>0){
        // console.log('turning right');
     }
-})*/
+})}, 14000);
